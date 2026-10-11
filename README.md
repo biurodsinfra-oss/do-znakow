@@ -10,6 +10,10 @@ Wtyczka .NET do BricsCAD, która nanosi oznakowanie pionowe i poziome na podstaw
 | `ZNAKIPLAN` | wstawia plan z pliku JSON (bez AI). Służy do ręcznych poprawek i powtarzalnych schematów. |
 | `ZNAKIKM` | kontrola: km i odsunięcie wskazanego punktu względem osi. |
 | `ZNAKIKATALOG` | lista kodów znaków i linii z katalogu. |
+| `ZNAKIOS` | wskazanie osi dla Claude (MCP). |
+| `ZNAKIMCP` | włącza / wyłącza most MCP. |
+
+**Claude Desktop / Claude Code (MCP):** Claude może sterować wtyczką bezpośrednio, bez klucza API. Instrukcja: [docs/MCP.md](docs/MCP.md).
 
 Przykładowe polecenie dla `ZNAKIAI`:
 
