@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Wtyczka .NET dla BricsCAD V25/V26 (.NET 8, Windows).
+    Ścieżkę instalacji BricsCAD można nadpisać:  dotnet build -p:BricsCADDir="D:\BricsCAD V26"
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>ZnakiAI.Bricscad</AssemblyName>
+    <RootNamespace>ZnakiAI.Bricscad</RootNamespace>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <BricsCADDir Condition="'$(BricsCADDir)' == ''">C:\Program Files\Bricsys\BricsCAD V26 en_US</BricsCADDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="BrxMgd">
+      <HintPath>$(BricsCADDir)\BrxMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TD_Mgd">
+      <HintPath>$(BricsCADDir)\TD_Mgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZnakiAI.Core\ZnakiAI.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\catalog\*.json" Link="catalog\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="znakiai.config.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,115 @@
+{
+ "_opis": "Katalog znaków poziomych (linie). Wymiary [m]. UWAGA: wartości startowe – sprawdź z Załącznikiem nr 2 do rozporządzenia (Dz.U. 2019 poz. 2311) i ustaw zweryfikowane=true.",
+ "pozycje": [
+  {
+   "kod": "P-1a",
+   "nazwa": "linia pojedyncza przerywana – segregacyjna",
+   "szerokosc": 0.12,
+   "kreska": 4.0,
+   "przerwa": 8.0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-1b",
+   "nazwa": "linia pojedyncza przerywana – krótka",
+   "szerokosc": 0.12,
+   "kreska": 1.0,
+   "przerwa": 1.0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-1c",
+   "nazwa": "linia pojedyncza przerywana – wydzielająca pasy",
+   "szerokosc": 0.12,
+   "kreska": 2.0,
+   "przerwa": 2.0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-1d",
+   "nazwa": "linia pojedyncza przerywana – ostrzegawcza",
+   "szerokosc": 0.12,
+   "kreska": 4.0,
+   "przerwa": 2.0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-1e",
+   "nazwa": "linia pojedyncza przerywana – prowadząca",
+   "szerokosc": 0.24,
+   "kreska": 1.0,
+   "przerwa": 1.0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-2a",
+   "nazwa": "linia pojedyncza ciągła",
+   "szerokosc": 0.12,
+   "kreska": 0,
+   "przerwa": 0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-2b",
+   "nazwa": "linia pojedyncza ciągła (szeroka)",
+   "szerokosc": 0.24,
+   "kreska": 0,
+   "przerwa": 0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-3a",
+   "nazwa": "linia jednostronnie przekraczalna",
+   "szerokosc": 0.12,
+   "kreska": 4.0,
+   "przerwa": 8.0,
+   "rozstaw": 0.24,
+   "drugaLinia": "ciagla",
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-4",
+   "nazwa": "linia podwójna ciągła",
+   "szerokosc": 0.12,
+   "kreska": 0,
+   "przerwa": 0,
+   "rozstaw": 0.24,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-7a",
+   "nazwa": "linia krawędziowa przerywana",
+   "szerokosc": 0.24,
+   "kreska": 1.0,
+   "przerwa": 1.0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  },
+  {
+   "kod": "P-7b",
+   "nazwa": "linia krawędziowa ciągła",
+   "szerokosc": 0.24,
+   "kreska": 0,
+   "przerwa": 0,
+   "rozstaw": 0,
+   "drugaLinia": null,
+   "zweryfikowane": false
+  }
+ ]
+}

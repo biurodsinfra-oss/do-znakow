@@ -1,0 +1,11 @@
+{
+  "znaki": [
+    { "kod": "A-14", "km": 20.0, "strona": "Prawa", "odsuniecie": 1.0, "status": "Tymczas", "tekst": null, "przeciwny": false },
+    { "kod": "B-36", "km": 45.0, "strona": "Prawa", "odsuniecie": 1.0, "status": "Tymczas", "tekst": "na odcinku 25 m", "przeciwny": false },
+    { "kod": "C-9",  "km": 48.0, "strona": "Prawa", "odsuniecie": 0.5, "status": "Tymczas", "tekst": null, "przeciwny": false }
+  ],
+  "linie": [
+    { "kod": "P-7b", "km_od": 45.0, "km_do": 70.0, "odsuniecie": -0.12, "status": "Tymczas" }
+  ],
+  "uwagi": "Przykład: zajęcie pasa przy prawej krawędzi km 50–70."
+}

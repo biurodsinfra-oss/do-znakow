@@ -1,0 +1,432 @@
+{
+ "_opis": "Katalog znaków pionowych. 'blok' = nazwa bloku w bibliotece DWG (null = kod). Uzupełnij o brakujące znaki według Dz.U. 2019 poz. 2310/2311.",
+ "pozycje": [
+  {
+   "kod": "A-1",
+   "nazwa": "niebezpieczny zakręt w prawo",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-2",
+   "nazwa": "niebezpieczny zakręt w lewo",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-3",
+   "nazwa": "niebezpieczne zakręty – pierwszy w prawo",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-4",
+   "nazwa": "niebezpieczne zakręty – pierwszy w lewo",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-5",
+   "nazwa": "skrzyżowanie dróg",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-6a",
+   "nazwa": "skrzyżowanie z drogą podporządkowaną występującą po obu stronach",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-7",
+   "nazwa": "ustąp pierwszeństwa",
+   "grupa": "A",
+   "ksztalt": "trojkat_odwrocony",
+   "blok": null
+  },
+  {
+   "kod": "A-8",
+   "nazwa": "skrzyżowanie o ruchu okrężnym",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-11",
+   "nazwa": "nierówna droga",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-11a",
+   "nazwa": "próg zwalniający",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-12a",
+   "nazwa": "zwężenie jezdni – dwustronne",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-12b",
+   "nazwa": "zwężenie jezdni – prawostronne",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-12c",
+   "nazwa": "zwężenie jezdni – lewostronne",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-14",
+   "nazwa": "roboty na drodze",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-15",
+   "nazwa": "śliska jezdnia",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-16",
+   "nazwa": "przejście dla pieszych",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-17",
+   "nazwa": "dzieci",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-20",
+   "nazwa": "odcinek jezdni o ruchu dwukierunkowym",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-21",
+   "nazwa": "tramwaj",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-24",
+   "nazwa": "rowerzyści",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-29",
+   "nazwa": "sygnały świetlne",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "A-30",
+   "nazwa": "inne niebezpieczeństwo",
+   "grupa": "A",
+   "ksztalt": "trojkat",
+   "blok": null
+  },
+  {
+   "kod": "B-1",
+   "nazwa": "zakaz ruchu w obu kierunkach",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-2",
+   "nazwa": "zakaz wjazdu",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-20",
+   "nazwa": "stop",
+   "grupa": "B",
+   "ksztalt": "osmiokat",
+   "blok": null
+  },
+  {
+   "kod": "B-21",
+   "nazwa": "zakaz skręcania w lewo",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-22",
+   "nazwa": "zakaz skręcania w prawo",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-23",
+   "nazwa": "zakaz zawracania",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-25",
+   "nazwa": "zakaz wyprzedzania",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-31",
+   "nazwa": "pierwszeństwo dla nadjeżdżających z przeciwka",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-33",
+   "nazwa": "ograniczenie prędkości",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-35",
+   "nazwa": "zakaz postoju",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-36",
+   "nazwa": "zakaz zatrzymywania się",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-41",
+   "nazwa": "zakaz ruchu pieszych",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "B-42",
+   "nazwa": "koniec zakazów",
+   "grupa": "B",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-2",
+   "nazwa": "nakaz jazdy w prawo za znakiem",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-4",
+   "nazwa": "nakaz jazdy w lewo za znakiem",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-5",
+   "nazwa": "nakaz jazdy prosto",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-9",
+   "nazwa": "nakaz jazdy z prawej strony znaku",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-10",
+   "nazwa": "nakaz jazdy z lewej strony znaku",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-12",
+   "nazwa": "ruch okrężny",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-13",
+   "nazwa": "droga dla rowerów",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-16",
+   "nazwa": "droga dla pieszych",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-13/16",
+   "nazwa": "droga dla pieszych i rowerów",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "C-16a",
+   "nazwa": "koniec drogi dla pieszych",
+   "grupa": "C",
+   "ksztalt": "kolo",
+   "blok": null
+  },
+  {
+   "kod": "D-1",
+   "nazwa": "droga z pierwszeństwem",
+   "grupa": "D",
+   "ksztalt": "romb",
+   "blok": null
+  },
+  {
+   "kod": "D-3",
+   "nazwa": "droga jednokierunkowa",
+   "grupa": "D",
+   "ksztalt": "kwadrat",
+   "blok": null
+  },
+  {
+   "kod": "D-4a",
+   "nazwa": "droga bez przejazdu",
+   "grupa": "D",
+   "ksztalt": "kwadrat",
+   "blok": null
+  },
+  {
+   "kod": "D-6",
+   "nazwa": "przejście dla pieszych",
+   "grupa": "D",
+   "ksztalt": "kwadrat",
+   "blok": null
+  },
+  {
+   "kod": "D-6a",
+   "nazwa": "przejazd dla rowerzystów",
+   "grupa": "D",
+   "ksztalt": "kwadrat",
+   "blok": null
+  },
+  {
+   "kod": "D-6b",
+   "nazwa": "przejście dla pieszych i przejazd dla rowerzystów",
+   "grupa": "D",
+   "ksztalt": "kwadrat",
+   "blok": null
+  },
+  {
+   "kod": "D-18",
+   "nazwa": "parking",
+   "grupa": "D",
+   "ksztalt": "kwadrat",
+   "blok": null
+  },
+  {
+   "kod": "D-18a",
+   "nazwa": "parking – miejsca zastrzeżone",
+   "grupa": "D",
+   "ksztalt": "kwadrat",
+   "blok": null
+  },
+  {
+   "kod": "T-1",
+   "nazwa": "tabliczka wskazująca odległość znaku od miejsca niebezpiecznego",
+   "grupa": "T",
+   "ksztalt": "tabliczka",
+   "blok": null
+  },
+  {
+   "kod": "T-2",
+   "nazwa": "tabliczka wskazująca długość odcinka",
+   "grupa": "T",
+   "ksztalt": "tabliczka",
+   "blok": null
+  },
+  {
+   "kod": "T-0",
+   "nazwa": "tabliczka z napisem (tekst dowolny)",
+   "grupa": "T",
+   "ksztalt": "tabliczka",
+   "blok": null
+  },
+  {
+   "kod": "U-3a",
+   "nazwa": "tablica prowadząca (kierunek w prawo)",
+   "grupa": "U",
+   "ksztalt": "urzadzenie",
+   "blok": null
+  },
+  {
+   "kod": "U-3b",
+   "nazwa": "tablica prowadząca (kierunek w lewo)",
+   "grupa": "U",
+   "ksztalt": "urzadzenie",
+   "blok": null
+  },
+  {
+   "kod": "U-20b",
+   "nazwa": "zapora (wg katalogu użytkownika – zweryfikuj nazwę)",
+   "grupa": "U",
+   "ksztalt": "urzadzenie",
+   "blok": null
+  },
+  {
+   "kod": "U-21a",
+   "nazwa": "tablica kierująca w prawo (zweryfikuj)",
+   "grupa": "U",
+   "ksztalt": "urzadzenie",
+   "blok": null
+  },
+  {
+   "kod": "U-21b",
+   "nazwa": "tablica kierująca w lewo (zweryfikuj)",
+   "grupa": "U",
+   "ksztalt": "urzadzenie",
+   "blok": null
+  }
+ ]
+}

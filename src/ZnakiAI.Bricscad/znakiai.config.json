@@ -1,0 +1,25 @@
+{
+  // Biblioteka bloków znaków (DWG). Bloki nazwane kodem znaku, np. "A-14", lub wg pola "blok" w katalogu.
+  // Puste = wtyczka utworzy proste bloki zastępcze (kształt + kod).
+  "bibliotekaDwg": "",
+
+  // Katalogi (ścieżki względne liczone od folderu wtyczki).
+  "katalogZnakow": "catalog/znaki_pionowe.json",
+  "katalogLinii": "catalog/znaki_poziome.json",
+
+  // AI – klucz API w zmiennej środowiskowej ANTHROPIC_API_KEY.
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+
+  // Grafika [m w jednostkach rysunku].
+  "skalaSymbolu": 1.0,
+  "odlegloscSymbolu": 4.0,
+  "promienSzukaniaIstniejacych": 30.0,
+
+  // Warstwy.
+  "warstwaPionProj": "ZN-PION-PROJ",
+  "warstwaPionTymczas": "ZN-PION-TYMCZ",
+  "warstwaPionIst": "ZN-PION-IST",
+  "warstwaPoz": "ZN-POZ-PROJ",
+  "warstwaPozTymczas": "ZN-POZ-TYMCZ"
+}
