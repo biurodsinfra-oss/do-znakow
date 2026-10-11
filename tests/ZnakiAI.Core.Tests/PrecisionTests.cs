@@ -140,4 +140,23 @@ public class PrecisionTests
         Assert.Equal(3, res.Signs.Count);
         Assert.Single(res.Markings);
     }
+
+    [Fact]
+    public void Every_catalog_sign_gets_builtin_graphics_within_one_metre()
+    {
+        foreach (var d in LoadCatalog().Signs)
+        {
+            var shapes = SignGraphics.Build(d);
+            Assert.NotEmpty(shapes);
+            foreach (var sh in shapes)
+            {
+                Assert.Equal(sh.Vertices.Count, sh.Bulges.Count);
+                Assert.All(sh.Vertices, v => Assert.InRange(v.Length, 0, 0.71));
+            }
+        }
+        var tri = SignGraphics.Triangle(1.0, up: true);
+        Assert.Equal(1.0, Vec2.Distance(tri[0], tri[1]), 9);
+        Assert.Equal(1.0, Vec2.Distance(tri[1], tri[2]), 9);
+        Assert.Equal(0, (tri[0] + tri[1] + tri[2]).Y, 9); // środek ciężkości w (0,0)
+    }
 }

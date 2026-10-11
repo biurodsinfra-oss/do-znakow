@@ -267,7 +267,10 @@ internal sealed class CadWriter
         tr2.Commit();
     }
 
-    /// <summary>Prosty blok: kształt wg grupy znaku + atrybuty KOD/STATUS/TEKST. Wymiar ~1 m przy skali 1.</summary>
+    /// <summary>
+    /// Blok z wbudowanej biblioteki: kształt i barwy wg grupy znaku (<see cref="SignGraphics"/>)
+    /// + atrybuty KOD/STATUS/TEKST. Wymiar ~1 m przy skali 1.
+    /// </summary>
     private static void CreatePlaceholderBlock(Transaction tr, BlockTable bt, SignDef d)
     {
         var btr = new BlockTableRecord { Name = d.BlockName, Origin = Point3d.Origin };
@@ -280,37 +283,33 @@ internal sealed class CadWriter
             tr.AddNewlyCreatedDBObject(e, true);
         }
 
-        const double r = 0.5;
-        switch (d.Ksztalt)
+        foreach (var shape in SignGraphics.Build(d))
         {
-            case "trojkat":
-            case "trojkat_odwrocony":
+            if (shape.FillAci is { } fill)
             {
-                double k = d.Ksztalt == "trojkat" ? 1 : -1;
-                var pl = new Polyline();
-                pl.AddVertexAt(0, new Point2d(-r, -k * r * 0.5), 0, 0, 0);
-                pl.AddVertexAt(1, new Point2d(r, -k * r * 0.5), 0, 0, 0);
-                pl.AddVertexAt(2, new Point2d(0, k * r), 0, 0, 0);
-                pl.Closed = true;
-                Add(pl);
-                break;
+                var pts = new Point2dCollection();
+                var bulges = new DoubleCollection();
+                foreach (var v in shape.Vertices) pts.Add(P2(v));
+                pts.Add(P2(shape.Vertices[0])); // kontur zamknięty
+                foreach (var b in shape.Bulges) bulges.Add(b);
+                bulges.Add(0);
+                var h = new Hatch { Color = Color.FromColorIndex(ColorMethod.ByAci, fill) };
+                Add(h);
+                h.SetHatchPattern(HatchPatternType.PreDefined, "SOLID");
+                h.AppendLoop(HatchLoopTypes.External, pts, bulges);
+                h.EvaluateHatch(true);
             }
-            case "kolo":
-                Add(new Circle(Point3d.Origin, Vector3d.ZAxis, r));
-                break;
-            default:
+            if (shape.OutlineAci is { } outline)
             {
-                var pl = new Polyline();
-                pl.AddVertexAt(0, new Point2d(-r, -r), 0, 0, 0);
-                pl.AddVertexAt(1, new Point2d(r, -r), 0, 0, 0);
-                pl.AddVertexAt(2, new Point2d(r, r), 0, 0, 0);
-                pl.AddVertexAt(3, new Point2d(-r, r), 0, 0, 0);
+                var pl = new Polyline { Color = Color.FromColorIndex(ColorMethod.ByAci, outline) };
+                for (int i = 0; i < shape.Vertices.Count; i++)
+                    pl.AddVertexAt(i, P2(shape.Vertices[i]), shape.Bulges[i], 0, 0);
                 pl.Closed = true;
                 Add(pl);
-                break;
             }
         }
 
+        const double r = 0.5;
         Add(new AttributeDefinition(new Point3d(-r, -r - 0.35, 0), d.Kod, "KOD", "Kod znaku", ObjectId.Null) { Height = 0.25 });
         Add(new AttributeDefinition(new Point3d(-r, -r - 0.70, 0), "proj", "STATUS", "Status", ObjectId.Null) { Height = 0.20 });
         Add(new AttributeDefinition(new Point3d(-r, -r - 1.00, 0), "", "TEKST", "Tekst dodatkowy", ObjectId.Null) { Height = 0.20 });
