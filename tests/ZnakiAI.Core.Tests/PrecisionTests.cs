@@ -159,4 +159,27 @@ public class PrecisionTests
         Assert.Equal(1.0, Vec2.Distance(tri[1], tri[2]), 9);
         Assert.Equal(0, (tri[0] + tri[1] + tri[2]).Y, 9); // środek ciężkości w (0,0)
     }
+
+    [Fact]
+    public void Summary_counts_signs_and_painted_area()
+    {
+        var ax = new Alignment([new Vec2(0, 0), new Vec2(100, 0)]);
+        var plan = new PlacementPlan
+        {
+            Znaki =
+            [
+                new SignPlacement { Kod = "A-14", Km = 10, Status = SignStatus.Tymczas },
+                new SignPlacement { Kod = "A-14", Km = 60, Strona = Side.Lewa, Status = SignStatus.Tymczas },
+                new SignPlacement { Kod = "B-36", Km = 20 },
+            ],
+            Linie = [new MarkingPlacement { Kod = "P-1a", KmOd = 0, KmDo = 30, Odsuniecie = 3 }],
+        };
+        var sum = Summary.Build(new PlanResolver(LoadCatalog()).Resolve(plan, ax));
+        Assert.Equal(2, sum.Znaki.Single(z => z.Kod == "A-14").Sztuk);
+        var l = Assert.Single(sum.Linie);
+        Assert.Equal(30, l.DlugoscOdcinka, 6);
+        Assert.Equal(12, l.DlugoscMalowana, 6);      // kreski 0-4, 12-16, 24-28
+        Assert.Equal(12 * 0.12, l.Powierzchnia, 6);
+        Assert.Equal(1 + 2 + 1, Summary.ToRows(sum).Count);
+    }
 }

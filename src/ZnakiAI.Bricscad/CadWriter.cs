@@ -87,6 +87,34 @@ internal sealed class CadWriter
         return (res.Signs.Count, strokes);
     }
 
+    /// <summary>Tabela zestawienia w obszarze modelu (pierwszy wiersz = nagłówek).</summary>
+    public void WriteSummaryTable(Point3d position, IReadOnlyList<string[]> rows, double textHeight)
+    {
+        using var tr = _db.TransactionManager.StartTransaction();
+        var bt = (BlockTable)tr.GetObject(_db.BlockTableId, OpenMode.ForRead);
+        var ms = (BlockTableRecord)tr.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
+        int cols = rows[0].Length;
+        double[] widths = [3.0, 22.0, 5.0, 3.0, 2.0]; // × wysokość tekstu
+        var table = new Table
+        {
+            TableStyle = _db.Tablestyle,
+            Position = position,
+            Layer = EnsureLayer(tr, _cfg.WarstwaPionProj, 1),
+        };
+        table.SetSize(rows.Count, cols);
+        table.SetRowHeight(textHeight * 2.0);
+        for (int c = 0; c < cols; c++) table.SetColumnWidth(c, textHeight * widths[Math.Min(c, widths.Length - 1)]);
+        for (int r = 0; r < rows.Count; r++)
+            for (int c = 0; c < cols; c++)
+            {
+                table.Cells[r, c].TextString = rows[r][c];
+                table.Cells[r, c].TextHeight = textHeight;
+            }
+        Add(ms, tr, table);
+        table.GenerateLayout();
+        tr.Commit();
+    }
+
     private static void Add(BlockTableRecord ms, Transaction tr, Entity e)
     {
         ms.AppendEntity(e);

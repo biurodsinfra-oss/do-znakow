@@ -238,6 +238,30 @@ public sealed class Commands
                 return;
             }
             ed.WriteMessage($"\nWstawiono {r.Signs} znaków i {r.Strokes} elementów linii w {sw.ElapsedMilliseconds} ms. Cofnij: U.\n");
+
+            var summary = Summary.Build(res);
+            var rows = Summary.ToRows(summary);
+            SaveSummaryCsv(doc, rows);
+            var tp = ed.GetPoint(new PromptPointOptions("\nPunkt wstawienia tabeli zestawienia <pomiń>: ") { AllowNone = true });
+            if (tp.Status == PromptStatus.OK)
+                writer.WriteSummaryTable(tp.Value, rows, Plugin.Config.WysokoscTekstuTabeli);
+        }
+    }
+
+    /// <summary>Zestawienie CSV (separator ;) obok rysunku – do kosztorysu / przedmiaru.</summary>
+    private static void SaveSummaryCsv(Document doc, List<string[]> rows)
+    {
+        try
+        {
+            string dir = Path.GetDirectoryName(doc.Name) is { Length: > 0 } d && Directory.Exists(d) ? d : Path.GetTempPath();
+            string file = Path.Combine(dir, $"{Path.GetFileNameWithoutExtension(doc.Name)}_zestawienie_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+            File.WriteAllLines(file, rows.Select(r => string.Join(";", r.Select(c => c.Contains(';') ? $"\"{c}\"" : c))),
+                new System.Text.UTF8Encoding(true));
+            doc.Editor.WriteMessage($"\nZestawienie zapisane: {file}");
+        }
+        catch (System.Exception ex)
+        {
+            doc.Editor.WriteMessage($"\nNie zapisano zestawienia: {ex.Message}");
         }
     }
 

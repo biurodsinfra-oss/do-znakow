@@ -15,6 +15,7 @@ public sealed class PluginConfig
     public double SkalaSymbolu { get; set; } = 1.0;
     public double OdlegloscSymbolu { get; set; } = 4.0;
     public double PromienSzukaniaIstniejacych { get; set; } = 30.0;
+    public double WysokoscTekstuTabeli { get; set; } = 1.25;
     public string WarstwaPionProj { get; set; } = "ZN-PION-PROJ";
     public string WarstwaPionTymczas { get; set; } = "ZN-PION-TYMCZ";
     public string WarstwaPionIst { get; set; } = "ZN-PION-IST";
