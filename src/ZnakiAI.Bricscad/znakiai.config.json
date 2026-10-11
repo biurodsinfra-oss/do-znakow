@@ -1,7 +1,8 @@
 {
-  // Biblioteka bloków znaków (DWG). Bloki nazwane kodem znaku, np. "A-14", lub wg pola "blok" w katalogu.
-  // Puste = wtyczka utworzy proste bloki zastępcze (kształt + kod).
-  "bibliotekaDwg": "",
+  // Biblioteka bloków znaków: plik DWG albo folder (przeszukiwany rekurencyjnie).
+  // W folderze: plik nazwany kodem (A-14.dwg) wstawiany jako blok, inaczej szukana definicja bloku o tej nazwie w plikach DWG.
+  // Pisownia nazw porównywana luźno: "C-13/16" = "C-13_16" = "c 13-16". Brak bloku = blok zastępczy (kształt + kod).
+  "bibliotekaDwg": "C:\\ProgramData\\GACAD",
 
   // Katalogi (ścieżki względne liczone od folderu wtyczki).
   "katalogZnakow": "catalog/znaki_pionowe.json",

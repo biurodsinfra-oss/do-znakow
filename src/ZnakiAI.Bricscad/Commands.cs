@@ -221,7 +221,9 @@ public sealed class Commands
 
         using (doc.LockDocument())
         {
-            var (n, strokes) = new CadWriter(doc.Database, Plugin.Config).Write(res);
+            var writer = new CadWriter(doc.Database, Plugin.Config);
+            var (n, strokes) = writer.Write(res);
+            foreach (var line in writer.Log) ed.WriteMessage($"\n  {line}");
             ed.WriteMessage($"\nWstawiono {n} znaków i {strokes} elementów linii w {sw.ElapsedMilliseconds} ms. Cofnij: U.\n");
         }
     }
