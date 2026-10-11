@@ -25,7 +25,7 @@ Przykładowe polecenie dla `ZNAKIAI`:
 3. Ustaw zmienną środowiskową `ANTHROPIC_API_KEY` (klucz z console.anthropic.com).
 4. W BricsCAD: `NETLOAD`, potem `src/ZnakiAI.Bricscad/bin/Release/net8.0-windows/ZnakiAI.Bricscad.dll`.
    Autoładowanie: dodaj DLL do `APPLOAD` → *Startup Suite*.
-5. W `znakiai.config.json` (obok DLL) wskaż `bibliotekaDwg`, czyli Twój DWG z blokami znaków nazwanymi kodem (`A-14`, `B-36`...). Bez biblioteki wtyczka tworzy proste bloki zastępcze.
+5. `bibliotekaDwg` w `znakiai.config.json` (obok DLL) wskazuje domyślnie folder `C:\ProgramData\GACAD`. Może to być folder albo pojedynczy plik DWG. W folderze wtyczka szuka pliku nazwanego kodem znaku (`A-14.dwg`), a jeśli go nie ma, bloku o tej nazwie wewnątrz plików DWG. Pisownię porównuje luźno. Skąd pochodzi każdy blok, widać w linii komend. Znaki, których nie znajdzie, dostają prosty blok zastępczy.
 
 ## Konfiguracja: `znakiai.config.json`
 
