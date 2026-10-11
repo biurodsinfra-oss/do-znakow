@@ -22,7 +22,13 @@ internal sealed class CadWriter
         _cfg = cfg;
     }
 
-    public (int Signs, int Strokes) Write(ResolveResult res)
+    /// <summary>
+    /// Zapisuje wynik. Gdy podano <paramref name="confirm"/>, obiekty są najpierw pokazane jako podgląd
+    /// (transakcja jeszcze niezatwierdzona, <paramref name="showPreview"/> odświeża ekran),
+    /// a po odpowiedzi „Nie” transakcja jest wycofywana – rysunek zostaje bez zmian.
+    /// Zwraca null, gdy użytkownik odrzucił plan.
+    /// </summary>
+    public (int Signs, int Strokes)? Write(ResolveResult res, Func<bool>? confirm = null, Action? showPreview = null)
     {
         int strokes = 0;
         EnsureBlocks(res.Signs.Select(s => s.Def).DistinctBy(d => d.BlockName));
@@ -63,6 +69,17 @@ internal sealed class CadWriter
                 pl.ConstantWidth = m.Width;
                 Add(ms, tr, pl);
                 strokes++;
+            }
+        }
+
+        if (confirm is not null)
+        {
+            showPreview?.Invoke();
+            if (!confirm())
+            {
+                tr.Abort();
+                showPreview?.Invoke();
+                return null;
             }
         }
 

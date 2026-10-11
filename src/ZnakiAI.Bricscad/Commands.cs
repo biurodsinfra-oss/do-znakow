@@ -210,21 +210,34 @@ public sealed class Commands
 
         if (res.Signs.Count + res.Markings.Count == 0) { ed.WriteMessage("\nNic do wstawienia.\n"); return; }
 
-        if (confirm)
+        bool Ask()
         {
-            var k = new PromptKeywordOptions("\nWstawić do rysunku? [Tak/Nie] <Tak>: ") { AllowNone = true };
+            var k = new PromptKeywordOptions("\nPodgląd na rysunku. Wstawić? [Tak/Nie] <Tak>: ") { AllowNone = true };
             k.Keywords.Add("Tak");
             k.Keywords.Add("Nie");
             var kr = ed.GetKeywords(k);
-            if (kr.Status == PromptStatus.Cancel || kr.StringResult == "Nie") return;
+            return kr.Status != PromptStatus.Cancel && kr.StringResult != "Nie";
+        }
+
+        void Refresh()
+        {
+            // pokazuje obiekty z niezatwierdzonej transakcji (podgląd) albo ich zniknięcie po wycofaniu
+            doc.TransactionManager.QueueForGraphicsFlush();
+            doc.TransactionManager.FlushGraphics();
+            ed.UpdateScreen();
         }
 
         using (doc.LockDocument())
         {
             var writer = new CadWriter(doc.Database, Plugin.Config);
-            var (n, strokes) = writer.Write(res);
+            var result = writer.Write(res, confirm ? Ask : null, confirm ? Refresh : null);
             foreach (var line in writer.Log) ed.WriteMessage($"\n  {line}");
-            ed.WriteMessage($"\nWstawiono {n} znaków i {strokes} elementów linii w {sw.ElapsedMilliseconds} ms. Cofnij: U.\n");
+            if (result is not { } r)
+            {
+                ed.WriteMessage("\nOdrzucono – rysunek bez zmian. Plan JSON można poprawić i wstawić przez ZNAKIPLAN.\n");
+                return;
+            }
+            ed.WriteMessage($"\nWstawiono {r.Signs} znaków i {r.Strokes} elementów linii w {sw.ElapsedMilliseconds} ms. Cofnij: U.\n");
         }
     }
 

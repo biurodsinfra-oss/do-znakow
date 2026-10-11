@@ -22,7 +22,7 @@ Model językowy **nigdy nie podaje współrzędnych**. Zwraca tylko plan w kilom
                              ▼
                         PlanResolver: walidacja + geometria (współrzędne, obroty, kreski)
                              ▼
-                        podgląd listy w linii komend → [Tak] → CadWriter
+                        lista w linii komend + podgląd na rysunku → [Tak] zatwierdza / [Nie] wycofuje
                              ▼
                         1 transakcja: bloki + atrybuty, odnośniki, linie o stałej szerokości
 ```
@@ -61,8 +61,7 @@ Model językowy **nigdy nie podaje współrzędnych**. Zwraca tylko plan w kilom
 
 ## Kolejne etapy (propozycja)
 
-1. Podgląd tymczasowej grafiki (transient) przed zatwierdzeniem.
-2. Rozpoznawanie krawędzi jezdni z rysunku: AI wybiera oś z warstw / obiektów zamiast wskazywania ręcznego.
-3. Znaki poziome powierzchniowe: przejścia P-10, linie zatrzymania P-12, strzałki P-8, powierzchnie wyłączone P-21.
-4. Szablony schematów COR (np. zajęcie pasa, zwężenie, ruch wahadłowy) jako gotowe plany do doboru przez AI.
-5. Zestawienie znaków (tabela ilości) generowane z planu.
+1. Rozpoznawanie krawędzi jezdni z rysunku: AI wybiera oś z warstw / obiektów zamiast wskazywania ręcznego.
+2. Znaki poziome powierzchniowe: przejścia P-10, linie zatrzymania P-12, strzałki P-8, powierzchnie wyłączone P-21.
+3. Szablony schematów COR (np. zajęcie pasa, zwężenie, ruch wahadłowy) jako gotowe plany do doboru przez AI.
+4. Zestawienie znaków (tabela ilości) generowane z planu.
