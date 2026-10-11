@@ -29,8 +29,14 @@ public sealed class Plugin : IExtensionApplication
     {
         var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
         Reload(Path.Combine(dir, "znakiai.config.json"));
+        string most = "";
+        if (Config.MostMcp)
+        {
+            try { McpBridge.Start(); most = " Most MCP: włączony."; }
+            catch (System.Exception ex) { most = $" Most MCP: nie uruchomiono ({ex.Message})."; }
+        }
         CadApp.DocumentManager.MdiActiveDocument?.Editor.WriteMessage(
-            "\nZnakiAI załadowane. Komendy: ZNAKIAI, ZNAKIPLAN, ZNAKIKM, ZNAKIKATALOG.\n");
+            "\nZnakiAI załadowane. Komendy: ZNAKIAI, ZNAKIPLAN, ZNAKIKM, ZNAKIKATALOG, ZNAKIOS, ZNAKIMCP." + most + "\n");
     }
 
     internal static void Reload(string configPath)
@@ -40,7 +46,7 @@ public sealed class Plugin : IExtensionApplication
         _planner = null;
     }
 
-    public void Terminate() { }
+    public void Terminate() => McpBridge.Stop();
 }
 
 public sealed class Commands
@@ -139,9 +145,31 @@ public sealed class Commands
         ed.WriteMessage("\n" + Plugin.Catalog.ToPromptText());
     }
 
+    /// <summary>Wskazanie osi dla narzędzi MCP (Claude Desktop / Claude Code).</summary>
+    [CommandMethod("ZNAKIOS", CommandFlags.Modal)]
+    public void ZnakiOs()
+    {
+        var doc = CadApp.DocumentManager.MdiActiveDocument;
+        bool ok = TryPickAxis(doc.Editor, doc.Database, out _, out _);
+        McpBridge.CompleteInteractive(ok ? null : "Projektant nie wskazał osi.");
+    }
+
+    /// <summary>Włącza / wyłącza most MCP.</summary>
+    [CommandMethod("ZNAKIMCP", CommandFlags.Modal)]
+    public void ZnakiMcp()
+    {
+        var ed = CadApp.DocumentManager.MdiActiveDocument.Editor;
+        if (McpBridge.Running) { McpBridge.Stop(); ed.WriteMessage("\nMost MCP wyłączony.\n"); }
+        else { McpBridge.Start(); ed.WriteMessage("\nMost MCP włączony. Claude może teraz sterować wtyczką.\n"); }
+    }
+
+    /// <summary>Wewnętrzna: wstawia plan przekazany przez MCP (z podglądem i pytaniem Tak/Nie).</summary>
+    [CommandMethod("ZNAKIMCPWSTAW", CommandFlags.Modal)]
+    public void ZnakiMcpWstaw() => McpBridge.RunPendingInsert();
+
     // ---------------------------------------------------------------------------------------
 
-    private static bool TryPickAxis(Editor ed, Database db, out Alignment axis, out ObjectId id)
+    internal static bool TryPickAxis(Editor ed, Database db, out Alignment axis, out ObjectId id)
     {
         axis = null!;
         id = ObjectId.Null;
@@ -162,12 +190,13 @@ public sealed class Commands
         }
         tr.Commit();
         id = r.ObjectId;
+        McpBridge.RememberAxis(db, id);
         ed.WriteMessage($"\nOś: długość {axis.Length:0.000} m.");
         return true;
     }
 
     /// <summary>Bloki znaków w pobliżu osi (nazwa bloku = kod z katalogu) jako kontekst dla AI.</summary>
-    private static List<ExistingObject> CollectExisting(Database db, Alignment axis, ObjectId axisId)
+    internal static List<ExistingObject> CollectExisting(Database db, Alignment axis, ObjectId axisId)
     {
         var result = new List<ExistingObject>();
         double radius = Plugin.Config.PromienSzukaniaIstniejacych;
@@ -192,7 +221,10 @@ public sealed class Commands
         return result;
     }
 
-    private static void ApplyPlan(Document doc, Alignment axis, PlacementPlan plan, bool confirm)
+    /// <summary>Wynik wstawiania planu (także dla narzędzia MCP wstaw_plan).</summary>
+    internal sealed record ApplyOutcome(bool Wstawiono, int Znaki, int ElementyLinii, List<string> Bledy, List<string> Ostrzezenia, string Komunikat);
+
+    internal static ApplyOutcome ApplyPlan(Document doc, Alignment axis, PlacementPlan plan, bool confirm)
     {
         var ed = doc.Editor;
         var sw = Stopwatch.StartNew();
@@ -208,7 +240,12 @@ public sealed class Commands
         foreach (var w in res.Warnings.Distinct()) ed.WriteMessage($"\n  Uwaga: {w}");
         if (!string.IsNullOrWhiteSpace(plan.Uwagi)) ed.WriteMessage($"\n  AI: {plan.Uwagi}");
 
-        if (res.Signs.Count + res.Markings.Count == 0) { ed.WriteMessage("\nNic do wstawienia.\n"); return; }
+        var warn = res.Warnings.Distinct().ToList();
+        if (res.Signs.Count + res.Markings.Count == 0)
+        {
+            ed.WriteMessage("\nNic do wstawienia.\n");
+            return new ApplyOutcome(false, 0, 0, res.Errors, warn, "Nic do wstawienia.");
+        }
 
         bool Ask()
         {
@@ -235,7 +272,7 @@ public sealed class Commands
             if (result is not { } r)
             {
                 ed.WriteMessage("\nOdrzucono – rysunek bez zmian. Plan JSON można poprawić i wstawić przez ZNAKIPLAN.\n");
-                return;
+                return new ApplyOutcome(false, 0, 0, res.Errors, warn, "Projektant odrzucił podgląd w BricsCAD. Rysunek bez zmian.");
             }
             ed.WriteMessage($"\nWstawiono {r.Signs} znaków i {r.Strokes} elementów linii w {sw.ElapsedMilliseconds} ms. Cofnij: U.\n");
 
@@ -245,6 +282,8 @@ public sealed class Commands
             var tp = ed.GetPoint(new PromptPointOptions("\nPunkt wstawienia tabeli zestawienia <pomiń>: ") { AllowNone = true });
             if (tp.Status == PromptStatus.OK)
                 writer.WriteSummaryTable(tp.Value, rows, Plugin.Config.WysokoscTekstuTabeli);
+            return new ApplyOutcome(true, r.Signs, r.Strokes, res.Errors, warn,
+                $"Wstawiono {r.Signs} znaków i {r.Strokes} elementów linii. Cofnięcie w BricsCAD: U.");
         }
     }
 

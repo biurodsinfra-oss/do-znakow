@@ -131,7 +131,7 @@ public sealed class AiPlanner
         return sb.ToString();
     }
 
-    internal static string BuildSystemPrompt(SignCatalog catalog) => $$"""
+    public static string BuildSystemPrompt(SignCatalog catalog) => $$"""
         Jesteś asystentem projektanta organizacji ruchu w Polsce. Na podstawie polecenia i kontekstu
         rysunku zwracasz plan rozmieszczenia oznakowania pionowego i poziomego w formacie JSON.
 

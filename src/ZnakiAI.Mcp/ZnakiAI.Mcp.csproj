@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Serwer MCP (stdio) dla Claude Desktop / Claude Code. Łączy się z wtyczką w BricsCAD
+    przez lokalny named pipe; sam nie potrzebuje BricsCAD ani klucza API.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>ZnakiAI.Mcp</AssemblyName>
+    <RootNamespace>ZnakiAI.Mcp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModelContextProtocol" Version="1.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZnakiAI.Core\ZnakiAI.Core.csproj" />
+  </ItemGroup>
+
+</Project>

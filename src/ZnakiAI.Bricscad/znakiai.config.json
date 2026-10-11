@@ -19,6 +19,9 @@
   // Wysokość tekstu w tabeli zestawienia [m] (1,25 m ≈ 2,5 mm na wydruku 1:500).
   "wysokoscTekstuTabeli": 1.25,
 
+  // Most MCP: Claude Desktop / Claude Code na tym komputerze steruje wtyczką (tylko bieżący użytkownik Windows).
+  "mostMcp": true,
+
   // Warstwy.
   "warstwaPionProj": "ZN-PION-PROJ",
   "warstwaPionTymczas": "ZN-PION-TYMCZ",

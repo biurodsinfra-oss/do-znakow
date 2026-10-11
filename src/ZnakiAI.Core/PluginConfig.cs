@@ -16,6 +16,8 @@ public sealed class PluginConfig
     public double OdlegloscSymbolu { get; set; } = 4.0;
     public double PromienSzukaniaIstniejacych { get; set; } = 30.0;
     public double WysokoscTekstuTabeli { get; set; } = 1.25;
+    /// <summary>Most dla serwera MCP (Claude Desktop / Claude Code na tym komputerze), uruchamiany przy wczytaniu wtyczki.</summary>
+    public bool MostMcp { get; set; } = true;
     public string WarstwaPionProj { get; set; } = "ZN-PION-PROJ";
     public string WarstwaPionTymczas { get; set; } = "ZN-PION-TYMCZ";
     public string WarstwaPionIst { get; set; } = "ZN-PION-IST";
