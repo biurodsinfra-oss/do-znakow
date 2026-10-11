@@ -16,6 +16,8 @@
   "skalaSymbolu": 1.0,
   "odlegloscSymbolu": 4.0,
   "promienSzukaniaIstniejacych": 30.0,
+  // Wysokość tekstu w tabeli zestawienia [m] (1,25 m ≈ 2,5 mm na wydruku 1:500).
+  "wysokoscTekstuTabeli": 1.25,
 
   // Warstwy.
   "warstwaPionProj": "ZN-PION-PROJ",

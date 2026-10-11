@@ -64,4 +64,3 @@ Model językowy **nigdy nie podaje współrzędnych**. Zwraca tylko plan w kilom
 1. Rozpoznawanie krawędzi jezdni z rysunku: AI wybiera oś z warstw / obiektów zamiast wskazywania ręcznego.
 2. Znaki poziome powierzchniowe: przejścia P-10, linie zatrzymania P-12, strzałki P-8, powierzchnie wyłączone P-21.
 3. Szablony schematów COR (np. zajęcie pasa, zwężenie, ruch wahadłowy) jako gotowe plany do doboru przez AI.
-4. Zestawienie znaków (tabela ilości) generowane z planu.

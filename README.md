@@ -6,7 +6,7 @@ Wtyczka .NET do BricsCAD, która nanosi oznakowanie pionowe i poziome na podstaw
 
 | Komenda | Działanie |
 |---|---|
-| `ZNAKIAI` | wskaż oś (krawędź jezdni), opcjonalnie strefę robót, wpisz polecenie. AI planuje, wtyczka waliduje i pokazuje podgląd na rysunku. „Tak” zatwierdza, „Nie” wycofuje bez śladu. Plan zapisuje się jako JSON obok DWG. |
+| `ZNAKIAI` | wskaż oś (krawędź jezdni), opcjonalnie strefę robót, wpisz polecenie. AI planuje, wtyczka waliduje i pokazuje podgląd na rysunku. „Tak” zatwierdza, „Nie” wycofuje bez śladu. Po zatwierdzeniu zapisuje zestawienie CSV (sztuki znaków, m² linii) i opcjonalnie wstawia je jako tabelę. Plan zapisuje się jako JSON obok DWG. |
 | `ZNAKIPLAN` | wstawia plan z pliku JSON (bez AI). Służy do ręcznych poprawek i powtarzalnych schematów. |
 | `ZNAKIKM` | kontrola: km i odsunięcie wskazanego punktu względem osi. |
 | `ZNAKIKATALOG` | lista kodów znaków i linii z katalogu. |
